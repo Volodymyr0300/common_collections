@@ -1,21 +1,27 @@
 fn main() {
-    let v1: Vec<i32> = Vec::new();
-    println!("Empty vector: {:?}", v1);
+    let v = vec![1, 2, 3, 4, 5];
+    let third: &i32 = &v[2];
+    println!("The third element is {}", third);
     
-    let v2 = vec![1, 2, 3];
-    println!("Empty vector: {:?}", v2);
+    match v.get(2) {
+        Some(third) => println!("The third element is {}", third),
+        None => println!("There is no third element."),
+    }
 
-    let mut v3 = Vec::new();
-    v3.push(5);
-    v3.push(6);
-    v3.push(7);
-    v3.push(8);
-    println!("Vector after pushes: {:?}", v3);
+    // ! This will cause a panic
+    // let does_not_exist = &v[100];
+    // println!("does_not_exist: {:?}", does_not_exist);
+    // let does_not_exist = v.get(100);
+    // println!("does_not_exist: {:?}", does_not_exist);
 
-    {
-        let v = vec![1, 2, 3, 4];
-        // do stuff with v
-    } // <- v goes out of scope and is freed here   
+    // ! Iterating over the values in a vector
+    // let mut v = vec![1, 2, 3, 4, 5];
+    // let first = &v[0];
+    // v.push(6);
+    // println!("The first element is: {}", first);
 
-    
+    let v = vec![100, 32, 57];
+    for i in &v {
+        println!("{}", i);
+    }
 }
