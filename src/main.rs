@@ -1,14 +1,18 @@
 fn main() {
-    let mut s = String::new(); // Create a new empty String
-    
 
-    let data = "initial contents";
-    let s = data.to_string();
-    // the method also works on a literal directly:
-    let s = "initial contents".to_string(); 
-    // Using the to_string method to create a String from a string literal
 
     let mut s = String::from("foo");
     s.push_str("bar");
     println!("s: {}", s); // s: foobar
+
+
+    let mut s1 = String::from("foo");
+    let s2 = "bar";
+    s1.push_str(s2);
+    println!("s1 is {}", s1);
+    println!("s2 is {}", s2);
+
+    let mut s = String::from("lo");
+    s.push('l');
+    println!("s: {}", s); // s: lol
 }
