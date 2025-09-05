@@ -1,31 +1,54 @@
 fn main() {
-    /* String Concatenation 
-    let s1 = String::from("Hello, ");
-    let s2 = String::from("world!");
-    let s3 = s1 + &s2; // note s1 has been moved here and can no longer be used
-    */
+    use std::collections::HashMap;
+    
+    let mut scores = HashMap::new();
+    scores.insert(String::from("Blue"), 10);
+    scores.insert(String::from("Yellow"), 50);
+    println!("Scores: {:?}", scores);
+    
+    
+    let teams = vec![String::from("Blue"), String::from("Yellow")];
+    let initial_scores = vec![10, 50];
+    let scores2: HashMap<_, _> = teams.iter().zip(initial_scores.iter()).collect();
+    println!("Scores2: {:?}", scores2);
 
-
-    /*
-    let s1 = String::from("tic");
-    let s2 = String::from("tac");
-    let s3 = String::from("toe");
-    let s = s1 + "-" + &s2 + "-" + &s3;
-     */
-
-    let s1 = String::from("tic");
-    let s2 = String::from("tac");
-    let s3 = String::from("toe");
-    let s = format!("{}-{}-{}", s1, s2, s3);
-    // s1, s2, and s3 are still valid here because format! does not take ownership
-   println!("Formatted string: {}", s);
-   println!("Original strings: {}, {}, {}", s1, s2, s3);
-   
-    for c in "Hello".chars() {
-        println!("{}", c);
-    }
-    for b in "Hello".bytes() {
-        println!("{}", b);
+    let field_name = String::from("Favorite color");
+    let field_value = String::from("Blue");
+    let mut map = HashMap::new();
+    map.insert(field_name, field_value);
+    // field_name and field_value are invalid at this point, try using them and
+    // see what compiler error you get!
+    println!("Map: {:?}", map);
+    
+    for (key, value) in &scores {
+        println!("{}: {}", key, value);
     }
 
+    let mut scores = HashMap::new();
+    scores.insert(String::from("Blue"), 10);
+    scores.insert(String::from("Yellow"), 50);
+    let team_name = String::from("Blue");
+    let score = scores.get(&team_name);
+    println!("Score for {}: {:?}", team_name, score);
+
+    for (key, value) in &scores {
+        println!("{}: {}", key, value);
+    }
+
+    scores.insert(String::from("Blue"), 10);
+    scores.insert(String::from("Blue"), 25);
+    println!("Scores after update: {:?}", scores);
+
+    scores.insert(String::from("Blue"), 10);
+    scores.entry(String::from("Yellow")).or_insert(50);
+    scores.entry(String::from("Blue")).or_insert(50);
+    println!("{:?}", scores);
+
+    let text = "hello world wonderful world";
+    let mut map = HashMap::new();
+    for word in text.split_whitespace() {
+        let count = map.entry(word).or_insert(0);
+        *count += 1;
+    }
+    println!("{:?}", map);
 }
